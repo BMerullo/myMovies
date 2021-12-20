@@ -31,7 +31,9 @@ const Header = () => {
     return (
         <div className='header'>
             <div>
-                <h1>myMovies</h1>
+                <Link to={'/main'} className='logo'>
+                    <h1>myMovies</h1>
+                </Link>
                 <Link to={''} className='links'>my movie list</Link>
             </div>
             <div style={{width: '170px', alignItems: 'center'}}>
