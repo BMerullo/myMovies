@@ -32,12 +32,12 @@ const Header = () => {
         <div className='header'>
             <div>
                 <h1>myMovies</h1>
-                <Link to={'/'} className='links'>my movie list</Link>
+                <Link to={''} className='links'>my movie list</Link>
             </div>
             <div style={{width: '170px', alignItems: 'center'}}>
                 {
                     userId
-                    ? <Link to={'/'} className='links'>edit user info</Link>
+                    ? <Link to={''} className='links'>edit user info</Link>
                     : null
                 }
                 <button onClick={logout}>Logout</button>

@@ -3,7 +3,7 @@ import { Link } from '@reach/router';
 
 const AllMovies = (props) => {
     const {movies} = props;
-console.log(movies)
+    
     return (
         <div className='wrapper'>
             <div className='search'>
