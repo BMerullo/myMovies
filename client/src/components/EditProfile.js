@@ -89,7 +89,7 @@ const EditProfile = (props) => {
                                 *{errors.email.message}
                             </div>
                             : null}
-                        <div className='registerFields'>
+                        {/* <div className='registerFields'>
                             <label>password</label><br />
                             <input type='password' name='password' value='' onChange={(e) => handleChange(e)} />
                         </div>
@@ -106,7 +106,7 @@ const EditProfile = (props) => {
                             ? <div className='errorMessageLog'>
                                 *{errors.confirmPassword.message}
                             </div>
-                            : null}
+                            : null} */}
                         <div style={{ textAlign: 'center', marginTop: '20px' }}>
                             <button className='registerButton'>Update</button>
                         </div>
