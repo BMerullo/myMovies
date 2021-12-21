@@ -6,7 +6,7 @@ module.exports = {
         List.find({})
             .then((allLists)=>{
                 console.log(allLists);
-                res.json(allPosts.reverse());
+                res.json(allLists.reverse());
             })
             .catch((err)=>{
                 res.json({message: "something went wrong with findAllLists"})
