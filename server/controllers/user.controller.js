@@ -1,99 +1,121 @@
-const User = require('../models/user.model');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-
+const User = require("../models/user.model");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 module.exports = {
 
-    register: (req, res) => {
-        console.log("in register")
-        console.log(req.body)
+    register: (req, res) =>{
+        console.log("in register");
+        console.log(req.body);
 
         const user = new User(req.body);
+
         user.save()
-        .then((newUser)=>{
-            console.log(newUser);
-            res.json({
-                successfulMesssage: "Thank you for registering",
-                user: newUser
+            .then((newUser)=>{
+                console.log(newUser);
+                res.json({
+                    successfulMessage: "Thank you for registering",
+                    user: newUser
+                })
             })
-        })
-        .catch ((err)=> {
-            console.log("regester not successful");
-            console.log(err);
-            res.status(400).json(err);
-        })
+            .catch((err)=>{
+                console.log("register not successful");
+                console.log(err);
+                res.status(400).json(err);
+            })        
     },
 
-    login: (req, res) => {
+    login: (req, res) =>{
         User.findOne({email: req.body.email})
             .then((userRecord)=>{
                 if(userRecord === null){
-                    res.status(400).json({message:"Invalid login attempt"})
+                    res.status(400).json({message: "Email and/or password are invalid"})
                 }
                 else{
                     bcrypt.compare(req.body.password, userRecord.password)
                         .then((isPasswordValid)=>{
                             if(isPasswordValid){
                                 console.log("Password is valid");
+
                                 res.cookie(
                                     "usertoken",
                                     jwt.sign(
                                         {
-                                        id: userRecord._id,
-                                        email: userRecord.email,
-                                        username: userRecord.username
-                                    }, 
-                                    process.env.JWT_SECRET
+                                            id: userRecord._id,
+                                            email: userRecord.email,
+                                            username: userRecord.username
+                                        },
+                                        process.env.JWT_SECRET,
                                     ),
+                                    
                                     {
                                         httpOnly: true,
-                                        expires: new Date(Date.now() + 90000000),
-                                    },
+                                        expires: new Date(Date.now() + 10000000)
+                                    }
                                 ).json({
-                                    message: "Successfully logged in",
+                                    message: "Successfuly logged in",
                                     userLoggedIn: userRecord.username,
                                     userId: userRecord._id
                                 })
                             }
                             else{
                                 res.status(400).json({
-                                    message: "Login and/or email Invalid!"
-                                });
+                                    message: "Email and/or password are invalid"
+                                })
                             }
                         })
-                        .catch((err)=> {
+                        .catch((err)=>{
                             console.log(err);
                             res.status(400).json({
-                                message: "Invalid attempt"
+                                message: "Email and/or password are invalid"
                             })
                         })
                 }
             })
             .catch((err)=>{
                 console.log("error");
-                res.status(400).json({message:"Invalid Attempt"})
+                res.status(400).json({
+                    message: "Invalid Attempt"
+                })
             })
     },
 
-    logout: (req, res)=> {
+    logout: (req, res) => {
         console.log("logging out");
         res.clearCookie("usertoken");
         res.json({
-            message: "You have successfully logged out"
+            message: "Thanks for using CapIt!"
         })
     },
 
+    updateUser: (req, res) => {
+        User.findOneAndUpdate(
+            { _id: req.params.id },
+            req.body,
+            { new: true, runValidators: true }
+        )
+            .then((updatedUser) => {
+                console.log(updatedUser);
+                res.json(updatedUser);
+            })
+            .catch((err) => {
+                res.status(400).json(err);
+                res.json({ message: "Something went wrong in updatedUser", error: err });
+            })
+    },
 
-    getOneUser: (req,res)=> {
+    getOneUser: (req, res) =>{
         User.findOne({_id: req.params.id})
-        .then((oneUser)=>{
-            console.log(oneUser);
-            res.json(oneUser);
-        })
-        .catch((err)=> {
-            console.log(err);
-            res.status(400).json(err);
-        });
-    },
+            .then((oneUser)=>{
+                console.log(oneUser);
+                res.json(oneUser);
+            })
+            .catch((err)=>{
+                console.log(err);
+                res.status(400).json(err);
+            })
+    }
+
+
+
 }

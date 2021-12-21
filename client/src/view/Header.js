@@ -39,7 +39,7 @@ const Header = () => {
             <div style={{width: '170px', alignItems: 'center'}}>
                 {
                     userId
-                    ? <Link to={''} className='links'>edit user info</Link>
+                    ? <Link to={`/edit/${localStorage.userId}`} className='links'>edit user info</Link>
                     : null
                 }
                 <button onClick={logout}>Logout</button>

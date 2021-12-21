@@ -10,7 +10,7 @@ const Main = () => {
     useEffect(() => {
 
         // change URL
-        axios.get('http://localhost:8000/api/movies')
+        axios.get(' http://www.omdbapi.com/?i=tt3896198&apikey=87985706')
             .then(res => {
                 setMovies(res.data);
                 setLoaded(true);
@@ -29,3 +29,4 @@ const Main = () => {
 }
 
 export default Main;
+

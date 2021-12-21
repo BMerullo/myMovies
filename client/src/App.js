@@ -5,6 +5,7 @@ import { Router } from '@reach/router';
 import MovieDetails from './components/MovieDetails';
 import Login from './components/Login';
 import Register from './components/Register';
+import EditProfile from './components/EditProfile';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Register path={'/register'} />
         <Main path={'/main'} />
         <MovieDetails path={'/:id'} />
+        <EditProfile path={`/edit/${localStorage.userId}`}/>
       </Router>
     </div>
   );

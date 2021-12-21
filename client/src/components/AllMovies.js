@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from '@reach/router';
 
 const AllMovies = (props) => {
-    const {movies} = props;
+    const {movies, submitHandler} = props;
     
     return (
         <div className='wrapper'>
@@ -10,11 +10,11 @@ const AllMovies = (props) => {
                 <p>Search By Category</p>
                 <select>
                     <option value='' defaultValue >Select</option>
-                    <option></option>
-                    <option></option>
+                    <option value= 't'>Title</option>
+                    <option value='genre'>Genre</option>
                     <option></option>
                 </select>
-                <button className='searchButton'>Search</button>
+                <button className='searchButton' onClick={submitHandler}>Search</button>
             </div>
             <div>
                 {/* {movies.map((movie, index) => {

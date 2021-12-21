@@ -57,7 +57,7 @@ const Register = (props) => {
             <form onSubmit={signUp} className='login'>
                 <div className='registerFields'>
                     <label>name</label><br/>
-                    <input type='text' name='username' value={user.username} onChange={(e) => handleChange(e)} />
+                    <input type='text' name='username' value={user.userName} onChange={(e) => handleChange(e)} />
                 </div>
                 {errors.username 
                 ? <div className='errorMessageLog'>

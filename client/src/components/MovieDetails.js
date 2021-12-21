@@ -26,7 +26,7 @@ const MovieDetails = (props) => {
 
         setMyMovies([...myMovies, movie._id]);
     }
-
+    
     return (
         <div>
             <Header />

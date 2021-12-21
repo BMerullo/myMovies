@@ -1,38 +1,35 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const UserSchema = new mongoose.Schema({
 
-    username: {
+    username:{
         type: String,
-        unique: [true, "this name has been used"],
-        required: [true, "Username is required"]
+        required:[true, "Username is required!"]
     },
 
-    email: {
-        type: String,
-        unique: [true, "this email has been used"],
-        required: [true, "Email is required"]
+    email:{
+        type:String,
+        required:[true, "Email is required!"]
     },
 
-    password: {
+    password:{
         type: String,
-        required: [true, "Password is required"],
-        minlength: [8, "Password must be at least 8 characters"]
-
+        required:[true, "password is required!"],
+        minLength: [8, "Your password must be at least 8 characters long"]
     }
-}, { timestamps: true })
+},{timestamps: true})
 
     UserSchema.virtual("confirmPassword")
-        .get(() => this._confirmPassword)
-        .set((value) => this._confirmPassword = value)
+        .get(()=>this._confirmPassword)
+        .set((value)=> this._confirmPassword = value)
 
     UserSchema.pre("validate", function(next){
         console.log("in validate");
+
         if(this.password !== this.confirmPassword){
-            this.invalidate("confirmPassword", "Passwords must match")
-            console.log("didn't match")
+            this.invalidate("confirmPassword", "Passwords must match");
+            console.log("Passwords didn't match")
         }
         console.log(this.password, this.confirmPassword);
 
@@ -41,9 +38,10 @@ const UserSchema = new mongoose.Schema({
 
     UserSchema.pre("save", function(next){
         console.log("pre save");
+
         bcrypt.hash(this.password, 10)
             .then((hashedPassword)=>{
-                console.log("in the hash")
+                console.log("in hash")
                 this.password = hashedPassword;
                 next();
             })
