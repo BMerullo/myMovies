@@ -34,7 +34,7 @@ const Header = () => {
                 <Link to={'/main'} className='logo'>
                     <h1>myMovies</h1>
                 </Link>
-                <Link to={''} className='links'>my movie list</Link>
+                <Link to={`/lists/${localStorage.userId}`} className='links'>my movie list</Link>
             </div>
             <div style={{width: '170px', alignItems: 'center'}}>
                 {

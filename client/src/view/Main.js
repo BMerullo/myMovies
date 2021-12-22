@@ -10,11 +10,11 @@ const Main = () => {
     useEffect(() => {
 
         // change URL
-        axios.get(' http://www.omdbapi.com/?i=tt3896198&apikey=87985706')
+        axios.get('https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=76e97ee4b0b9bbd10b8a54f5b87265c0')
             .then(res => {
-                setMovies(res.data);
+                setMovies(res.data.results);
                 setLoaded(true);
-                console.log(res.data);
+                console.log(res.data.results);
             })
     }, []);
 

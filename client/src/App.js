@@ -6,6 +6,7 @@ import MovieDetails from './components/MovieDetails';
 import Login from './components/Login';
 import Register from './components/Register';
 import EditProfile from './components/EditProfile';
+import AllLists from './components/AllLists';
 
 function App() {
   return (
@@ -14,8 +15,9 @@ function App() {
         <Login path={'/'} />
         <Register path={'/register'} />
         <Main path={'/main'} />
-        <MovieDetails path={'/:id'} />
+        <MovieDetails path={'/movies/:id'} />
         <EditProfile path={`/edit/${localStorage.userId}`}/>
+        <AllLists path={`/lists/${localStorage.userId}`} />
       </Router>
     </div>
   );

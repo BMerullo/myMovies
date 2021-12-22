@@ -5,7 +5,7 @@ const AllMovies = (props) => {
     const {movies, submitHandler} = props;
     
     return (
-        <div className='wrapper'>
+        <div className='wrapper' style={{display: 'block'}}>
             <div className='search'>
                 <p>Search By Category</p>
                 <select>
@@ -16,17 +16,17 @@ const AllMovies = (props) => {
                 </select>
                 <button className='searchButton' onClick={submitHandler}>Search</button>
             </div>
-            <div>
-                {/* {movies.map((movie, index) => {
+            <div style={{display: 'flex', flexWrap: 'wrap'}}>
+                {movies.map((movie, index) => {
                     return (
-                        <div key={index}>
-                            <Link to={'/'}>
-                                {movie.title}
-                                {movie.image}
+                        <div key={index} className='oneMovie'>
+                            <Link to={`/movies/${movie.id}`} style={{color: 'black', textDecoration: 'none'}}>
+                                <div style={{fontWeight: 'bold'}}>{movie.title}</div>
+                                <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt='img' />
                             </Link>
                         </div>
                     )
-                })} */}
+                })}
             </div>
         </div>
     )
