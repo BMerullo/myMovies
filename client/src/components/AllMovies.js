@@ -49,7 +49,7 @@ const AllMovies = (props) => {
                     return (
                         <div key={index} className='oneMovie'>
                             <Link to={`/movies/${movie.id}`} style={{color: 'black', textDecoration: 'none'}}>
-                                <div style={{fontWeight: 'bold'}}>{movie.title}</div>
+                                <div style={{fontWeight: 'bold', height: '30px'}}>{movie.title}</div>
                                 <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt='img' />
                             </Link>
                         </div>
