@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Header from '../view/Header';
+import { navigate } from '@reach/router';
 
 const MovieDetails = (props) => {
     const {id} = props;
@@ -8,26 +9,32 @@ const MovieDetails = (props) => {
     const [movie, setMovie] = useState({});
     const [myMovies, setMyMovies] = useState([]);
     const [genres, setGenres] = useState([]);
+    const [userId, setUserId] = useState('');
     
     useEffect(() => {
+        setUserId(localStorage.getItem('userId'));
+    }, []);
 
+    useEffect(() => {
         axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=76e97ee4b0b9bbd10b8a54f5b87265c0&language=en-US`)
             .then((res) => {
                 setMovie(res.data);
                 console.log(res.data);
                 setGenres(res.data.genres);
-                console.log(res.data.genres);
             })
             .catch((err) => console.log(err));
     }, []);
 
     const addMovie = () => {
-        axios.post('http://localhost:8000/api/movies/' + id, movie)
-            .then(res => {
+        let title = movie.title;
+        let imdbID = id;
+        axios.post('http://localhost:8000/api/lists/movie/' + id, {title, imdbID}, {withCredentials: true})
+            .then(res => {    
                 console.log(res.data);
-            });
-
-        setMyMovies([...myMovies, movie._id]);
+                navigate(`/lists/${userId}`)
+            })
+            .catch(err => console.log(err));
+            setMyMovies([...myMovies, movie.id]);
     }
     
     return (
