@@ -43,7 +43,7 @@ const MovieDetails = (props) => {
             <div className='wrapper' style={{alignItems: 'flex-end'}}>
                 <div className='movieDetails'>
                     <div>
-                        <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt='image' style={{width: '300px'}}/>
+                        <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt='image' style={{width: '300px', marginRight: '20px'}}/>
                     </div>
                     <div>
                         <div style={{fontWeight: 'bold', fontSize: '20px', marginBottom: '30px'}}>{movie.title}</div>
@@ -58,6 +58,7 @@ const MovieDetails = (props) => {
                         </div>
                         <div><p>Release Date:</p> {movie.release_date}</div>
                         <div><p>Votes:</p> {movie.vote_average}</div>
+                        <div><p>Description</p>{movie.overview}</div>
                     </div>
                 </div>
                 <div>
